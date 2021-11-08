@@ -5,6 +5,7 @@ import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-b
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {HttpClientModule} from '@angular/common/http'
 
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
@@ -22,7 +23,8 @@ export function MSALInstanceFactory(): IPublicClientApplication{
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MsalModule
+    MsalModule,
+    HttpClientModule
   ],
   providers: [{
     provide: MSAL_INSTANCE,
