@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'Chat-App-Auth0';
 
   constructor(private msalService: MsalService, private api : ApiService){
-    this.api.getData().subscribe(data=>{
+    var item = this.api.getData().subscribe(data=>{
       console.warn(data)
     })
   }
