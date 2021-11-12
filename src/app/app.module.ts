@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
-
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http'
-
+import {HttpClientModule} from '@angular/common/http';
+import { ProfileoverviewComponent } from './profileoverview/profileoverview.component';
+import { LoginComponent } from './login/login.component'
+import { CommunicationService } from './communication.service';
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
     auth:{
@@ -18,13 +20,16 @@ export function MSALInstanceFactory(): IPublicClientApplication{
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfileoverviewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MsalModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [{
     provide: MSAL_INSTANCE,

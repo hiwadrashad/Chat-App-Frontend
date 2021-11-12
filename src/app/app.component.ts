@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-common';
 import {ApiService} from './api.service'
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,8 @@ import {ApiService} from './api.service'
 export class AppComponent {
   title = 'Chat-App-Auth0';
 
-  constructor(private msalService: MsalService, private api : ApiService){
-    var item = this.api.getData().subscribe(data=>{
+  constructor(private msalService: MsalService, private api : ApiService, private router:Router ){
+    var item = this.api.getAllUsers().subscribe(data=>{
       console.warn(data)
     })
   }
@@ -26,6 +27,7 @@ export class AppComponent {
     this.msalService.loginPopup().subscribe((response: AuthenticationResult) => {
       this.msalService.instance.setActiveAccount(response.account)
     });
+    this.router.navigate(['profileoverview']);
   }
 
   logout() {
