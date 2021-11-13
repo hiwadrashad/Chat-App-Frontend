@@ -1,6 +1,9 @@
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../communication.service';
+import { ApiService } from '../api.service'; 
+import {User} from '../../logic/models/user'
+
 @Component({
   selector: 'app-profileoverview',
   templateUrl: './profileoverview.component.html',
@@ -9,7 +12,8 @@ import { CommunicationService } from '../communication.service';
 export class ProfileoverviewComponent implements OnInit {
 
   name! : string;
-  constructor(private communication: CommunicationService) { }
+  allprofilesbysingleemail! : User[]; 
+  constructor(private communication: CommunicationService,private api : ApiService) { }
 
   ngOnInit(): void {
     // console.warn("test")
@@ -21,7 +25,20 @@ export class ProfileoverviewComponent implements OnInit {
     //     this.name = communicationemit;
     //   }
     // });
-    this.communication.GetMicrosoftUser().subscribe(a => this.name = a);
+    this.communication.GetMicrosoftUser().subscribe(a => 
+      {
+        this.name = a;
+        if (this.name != null || this.name != "")
+        {
+          this.api.getUsersByEmailAdress(this.name).subscribe(
+            x => 
+            {
+              this.allprofilesbysingleemail = x as User[];
+              console.log(this.allprofilesbysingleemail);
+            }
+          )
+        }
+      });
   }
 
 }

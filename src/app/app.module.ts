@@ -9,6 +9,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { ProfileoverviewComponent } from './profileoverview/profileoverview.component';
 import { LoginComponent } from './login/login.component'
 import { CommunicationService } from './communication.service';
+import { SellingPageComponent } from './selling-page/selling-page.component';
+import { RegisterComponent } from './register/register.component';
+import { ChatComponent } from './chat/chat.component';
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
     auth:{
@@ -22,7 +25,10 @@ export function MSALInstanceFactory(): IPublicClientApplication{
   declarations: [
     AppComponent,
     ProfileoverviewComponent,
-    LoginComponent
+    LoginComponent,
+    SellingPageComponent,
+    RegisterComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

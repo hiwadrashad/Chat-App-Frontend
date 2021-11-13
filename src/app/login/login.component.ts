@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private msalService: MsalService, private api : ApiService, private router:Router, private communication: CommunicationService){
     this.user = {} as User;
     var item = this.api.getAllUsers().subscribe(data=>{
-      console.warn(data)
+      //console.warn(data)
     });
   }
 

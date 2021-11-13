@@ -14,7 +14,7 @@ export class AppComponent {
 
   constructor(private msalService: MsalService, private api : ApiService, private router:Router ){
     var item = this.api.getAllUsers().subscribe(data=>{
-      console.warn(data)
+      //console.warn(data)
     })
   }
 
