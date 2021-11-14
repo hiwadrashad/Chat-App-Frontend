@@ -1,3 +1,164 @@
+  <style></style>
+  <style>
+      body{
+    margin-top:20px;
+    background:#eee;  
+    overflow-x: hidden !;  
+}
+a {
+    color: #f96332;
+}
+.m-t-5{
+    margin-top: 5px;   
+}
+.card {
+    background: #fff;
+    margin-bottom: 30px;
+    transition: .5s;
+    border: 0;
+    border-radius: .1875rem;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    box-shadow: none;
+}
+.card .body {
+    font-size: 14px;
+    color: #424242;
+    padding: 20px;
+    font-weight: 400;
+}
+header{
+    margin-top: -200px;
+}
+.profile-page{
+    width: 1000px;
+    margin-top: 200px;
+}
+.profile-page .profile-header {
+    position: relative
+}
+
+.profile-page .profile-header .profile-image img {
+    border-radius: 50%;
+    width: 140px;
+    border: 3px solid #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
+.profile-page .profile-header .social-icon a {
+    margin: 0 5px
+}
+
+.profile-page .profile-sub-header {
+    min-height: 60px;
+    width: 100%
+}
+
+.profile-page .profile-sub-header ul.box-list {
+    display: inline-table;
+    table-layout: fixed;
+    width: 100%;
+    background: #eee
+}
+
+.profile-page .profile-sub-header ul.box-list li {
+    border-right: 1px solid #e0e0e0;
+    display: table-cell;
+    list-style: none
+}
+
+.profile-page .profile-sub-header ul.box-list li:last-child {
+    border-right: none
+}
+
+.profile-page .profile-sub-header ul.box-list li a {
+    display: block;
+    padding: 15px 0;
+    color: #424242
+}
+.profile-card{
+    transform: scale(0.8);
+    min-width: 450px;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.title{
+    text-align: center;
+
+}
+
+.title-sub{
+    color: gray;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.profile-card-container{
+    margin-top: 100px;
+    margin-left: -100px;
+    width: 500px;
+    height: 600px;
+    overflow: auto;
+    
+}
+/* Scroll 1 */
+.sc1::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.sc1::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+.sc1::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 10px;
+}
+
+.sc1{
+    overflow-x: hidden;
+    width: 1000px !important;
+    flex-basis: 450px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.speech-bubble{
+    width: 700px;
+}
+
+.register-button{
+    background-color: aquamarine;
+    color: white;
+}
+
+.preference > p {
+color: white;
+}
+
+.preference > h2{
+    color: white;
+}
+
+.preference{
+    transform: translate(200px,-400px);
+    width: 200px;
+}
+
+.flex-allign{
+    display: flex;
+}
+.aside{
+    transform: translateX(100px);
+}
+  </style>
   <header class="header-area header-sticky wow slideInDown animated" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
     <div class="container">
       <div class="row">
@@ -22,7 +183,118 @@
       </div>
     </div>
   </header>
-<p>profileoverview works!</p>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <div class="container profile-page">
+      
+    <div class="title">
+        <h1 class="title-header">Profiles</h1>
+        <span class="title-sub">Register if no profiles are available</span>
+        <hr/>
+    </div>
+    <div class="flex-allign">
+       <div class="aside order-md-2">
+        <img class="speech-bubble" src="../../assets/images/speech-bubble.png"/>    
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="preference">
+                        <h2>Account creation</h2>
+                        <p>Empty profiles? start here!</p>
+                        <a href="sign-up.html" class="btn button register-button">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="profile-card-container sc1">
+        <div class="col-xl-6 col-lg-7 col-md-12">
+            <div class="card profile-header">
+                <div class="body profile-card">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="profile-image float-md-right"> <img src="../../assets/dist/img/avatars/avatar-male-1.jpg" alt=""> </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-12">
+                            <h4 class="m-t-0 m-b-0"><strong>Michael</strong> Deo</h4>
+                            <span class="job_post">Ui UX Designer</span>
+                            <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                            <div>
+                                <button class="btn btn-primary btn-round">Follow</button>
+                                <button class="btn btn-primary btn-round btn-simple">Message</button>
+                            </div>
+                            <p class="social-icon m-t-5 m-b-0">
+                                <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                <a title="Google-plus" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Behance" href="javascript:void(0);"><i class="fa fa-behance"></i></a>
+                                <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
+                            </p>
+                        </div>                
+                    </div>
+                </div>                    
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-7 col-md-12">
+            <div class="card profile-header">
+                <div class="body profile-card">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="profile-image float-md-right"> <img src="../../assets/dist/img/avatars/avatar-male-2.jpg" alt=""> </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-12">
+                            <h4 class="m-t-0 m-b-0"><strong>Michael</strong> Deo</h4>
+                            <span class="job_post">Ui UX Designer</span>
+                            <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                            <div>
+                                <button class="btn btn-primary btn-round">Follow</button>
+                                <button class="btn btn-primary btn-round btn-simple">Message</button>
+                            </div>
+                            <p class="social-icon m-t-5 m-b-0">
+                                <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                <a title="Google-plus" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Behance" href="javascript:void(0);"><i class="fa fa-behance"></i></a>
+                                <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
+                            </p>
+                        </div>                
+                    </div>
+                </div>                    
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-7 col-md-12">
+            <div class="card profile-header">
+                <div class="body profile-card">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="profile-image float-md-right"> <img src="../../assets/dist/img/avatars/avatar-male-3.jpg" alt=""> </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-12">
+                            <h4 class="m-t-0 m-b-0"><strong>Michael</strong> Deo</h4>
+                            <span class="job_post">Ui UX Designer</span>
+                            <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                            <div>
+                                <button class="btn btn-primary btn-round">Follow</button>
+                                <button class="btn btn-primary btn-round btn-simple">Message</button>
+                            </div>
+                            <p class="social-icon m-t-5 m-b-0">
+                                <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                <a title="Google-plus" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Behance" href="javascript:void(0);"><i class="fa fa-behance"></i></a>
+                                <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
+                            </p>
+                        </div>                
+                    </div>
+                </div>                    
+            </div>
+        </div>
+        
+</div>
+</div>
+
+
+
+<!-- <p>profileoverview works!</p>
 <div>
     {{name}}
-</div>
+</div> -->
