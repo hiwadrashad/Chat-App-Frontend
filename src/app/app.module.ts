@@ -12,6 +12,8 @@ import { CommunicationService } from './communication.service';
 import { SellingPageComponent } from './selling-page/selling-page.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
+import { AddGroupChatModalComponent } from './add-group-chat-modal/add-group-chat-modal.component';
+import { AddSingleChatModalComponent } from './add-single-chat-modal/add-single-chat-modal.component';
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
     auth:{
@@ -28,7 +30,9 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     LoginComponent,
     SellingPageComponent,
     RegisterComponent,
-    ChatComponent
+    ChatComponent,
+    AddGroupChatModalComponent,
+    AddSingleChatModalComponent
   ],
   imports: [
     BrowserModule,

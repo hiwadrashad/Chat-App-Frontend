@@ -1,5 +1,7 @@
   <style></style>
   <style>
+          @import url(../../assets/dist/css/lib/bootstrap.min.css);
+   @import url(../../assets/dist/css/swipe.min.css);
       body{
     margin-top:20px;
     background:#eee;  
@@ -80,9 +82,7 @@ header{
 .profile-card{
     transform: scale(0.8);
     min-width: 450px;
-    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .title{
     text-align: center;
@@ -104,7 +104,7 @@ hr {
 .profile-card-container{
     margin-top: 100px;
     margin-left: -100px;
-    width: 500px;
+    width: 250px !important;
     height: 600px;
     overflow: auto;
     
@@ -125,13 +125,15 @@ hr {
 
 .sc1{
     overflow-x: hidden;
-    width: 1000px !important;
+    width: 500px !important;
     flex-basis: 450px;
     flex-grow: 0;
     flex-shrink: 0;
+    transform: translateY(-80px);
 }
 .speech-bubble{
-    width: 700px;
+    width: 600px;
+    margin-left: 100px;
 }
 
 .register-button{
@@ -158,21 +160,93 @@ color: white;
 .aside{
     transform: translateX(100px);
 }
+.bg-cover {
+    background-size: cover !important;
+}
+.jumbotron{
+    background: url("../../assets/profiles-banner.png");
+ transform: translateY(100px);
+ width: 100vw;
+}
+
+header{
+     transform: translateY(-150px) !important;
+      border-bottom: 0px;
+    }
+
+    .logo{
+      width: 80px;
+    }
+    .header-logo{
+      transform: translateY(10px);
+    }
+
+    .form-inline{
+        width: 300px;
+    }
+    .chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+  margin-right: 10px;
+}
+
+.chip:hover{
+    cursor: pointer;
+}
+
+.profile-search-container{
+    width: 500px;
+}
+.search-options{
+    transform: translateX(-40px);
+}
+.banner-sub{
+    color: white;
+}
+
+@media only screen and (max-width: 1400px) {
+    .jumbotron{
+        transform: translate(-100px,100px);
+    }
+
+    .text-center{
+        transform: translateX(100px);
+    } 
+}
+
+.login-btn{
+    background-color: #33c7f9;
+}
+
+.profile-image
+{
+    transform: translateX(10px);
+}
   </style>
-  <header class="header-area header-sticky wow slideInDown animated" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
+<div class="banner">
+    <div  class="jumbotron bg-cover text-white">
+        <div class="container py-5 text-center">
+            <h1 class="display-4 font-weight-bold">Profile overview</h1>
+            <p class="font-italic banner-sub mb-0">Each user has the ability to generate multiple profiles.</p>
+        </div>
+    </div>
+</div>
+<header class="header-area header-sticky wow slideInDown animated" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
     <div class="container">
       <div class="row">
         <div class="col-12">
           <nav class="main-nav">
             <a href="index.html" class="logo">
-              <img src="../../assets/assets/images/logo.png" alt="Chain App Dev">
-            </a>
+                <img class="logo header-logo" src="../../assets/assets/images/logo.png" alt="Chain App Dev">
+                        </a>
             <ul class="nav">
-              <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-              <li class="scroll-to-section"><a href="#services" class="">Services</a></li>
-              <li class="scroll-to-section"><a href="#about" class="">About</a></li>
-              <li class="scroll-to-section"><a href="#pricing" class="">Pricing</a></li>
-              <li class="scroll-to-section"><a href="#newsletter" class="">Newsletter</a></li>
+                <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="#services" class="">Account</a></li>
               <li><div class="gradient-button"><a id="modal_trigger" href="#modal" class="active"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
             </ul>        
             <a class="menu-trigger">
@@ -184,16 +258,9 @@ color: white;
     </div>
   </header>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
   <div class="container profile-page">
-      
-    <div class="title">
-        <h1 class="title-header">Profiles</h1>
-        <span class="title-sub">Register if no profiles are available</span>
-        <hr/>
-    </div>
     <div class="flex-allign">
-       <div class="aside order-md-2">
+       <div class=" order-md-2">
         <img class="speech-bubble" src="../../assets/images/speech-bubble.png"/>    
             <div class="container">
                 <div class="col-md-12">
@@ -205,27 +272,38 @@ color: white;
                 </div>
             </div>
         </div>
+    <div class="profile-search-container">
+        <div class="search-options">
+        <div class="search">
+            <form class="form-inline position-relative">
+                <input type="search" class="form-control" id="conversations" placeholder="Search for profile...">
+                <button type="button" class="btn btn-link loop"><i class="material-icons">search</i></button>
+            </form>
+        </div>
+        <div class="chip">
+            All
+          </div>
+          <div class="chip">
+            Recent
+          </div>
+          </div>
     <div class="profile-card-container sc1">
         <div class="col-xl-6 col-lg-7 col-md-12">
             <div class="card profile-header">
                 <div class="body profile-card">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-12">
-                            <div class="profile-image float-md-right"> <img src="../../assets/dist/img/avatars/avatar-male-1.jpg" alt=""> </div>
+                            <div class="profile-image float-md-right"> <img class="" src="../../assets/dist/img/avatars/avatar-male-1.jpg" alt=""> </div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-12">
-                            <h4 class="m-t-0 m-b-0"><strong>Michael</strong> Deo</h4>
-                            <span class="job_post">Ui UX Designer</span>
-                            <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                            <h4 class="m-t-0 m-b-0"><strong>Usernam123</strong></h4>
+                            <p>Michael Johnson</p>
                             <div>
-                                <button class="btn btn-primary btn-round">Follow</button>
-                                <button class="btn btn-primary btn-round btn-simple">Message</button>
+                                <button class="btn btn-primary login-btn btn-round">Login</button>
                             </div>
                             <p class="social-icon m-t-5 m-b-0">
                                 <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
                                 <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
-                                <a title="Google-plus" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
-                                <a title="Behance" href="javascript:void(0);"><i class="fa fa-behance"></i></a>
                                 <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
                             </p>
                         </div>                
@@ -238,21 +316,17 @@ color: white;
                 <div class="body profile-card">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-12">
-                            <div class="profile-image float-md-right"> <img src="../../assets/dist/img/avatars/avatar-male-2.jpg" alt=""> </div>
+                            <div class="profile-image float-md-right"> <img class="" src="../../assets/dist/img/avatars/avatar-male-2.jpg" alt=""> </div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-12">
-                            <h4 class="m-t-0 m-b-0"><strong>Michael</strong> Deo</h4>
-                            <span class="job_post">Ui UX Designer</span>
-                            <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                            <h4 class="m-t-0 m-b-0"><strong>Usernam123</strong></h4>
+                            <p>Michael Johnson</p>
                             <div>
-                                <button class="btn btn-primary btn-round">Follow</button>
-                                <button class="btn btn-primary btn-round btn-simple">Message</button>
+                                <button class="btn btn-primary login-btn btn-round">Login</button>
                             </div>
                             <p class="social-icon m-t-5 m-b-0">
                                 <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
                                 <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
-                                <a title="Google-plus" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
-                                <a title="Behance" href="javascript:void(0);"><i class="fa fa-behance"></i></a>
                                 <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
                             </p>
                         </div>                
@@ -266,21 +340,17 @@ color: white;
                 <div class="body profile-card">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-12">
-                            <div class="profile-image float-md-right"> <img src="../../assets/dist/img/avatars/avatar-male-3.jpg" alt=""> </div>
+                            <div class="profile-image float-md-right"> <img class="" src="../../assets/dist/img/avatars/avatar-male-3.jpg" alt=""> </div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-12">
-                            <h4 class="m-t-0 m-b-0"><strong>Michael</strong> Deo</h4>
-                            <span class="job_post">Ui UX Designer</span>
-                            <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                            <h4 class="m-t-0 m-b-0"><strong>Usernam123</strong></h4>
+                            <p>Michael Johnson</p>
                             <div>
-                                <button class="btn btn-primary btn-round">Follow</button>
-                                <button class="btn btn-primary btn-round btn-simple">Message</button>
+                                <button class="btn btn-primary login-btn btn-round">Login</button>
                             </div>
                             <p class="social-icon m-t-5 m-b-0">
                                 <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
                                 <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
-                                <a title="Google-plus" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
-                                <a title="Behance" href="javascript:void(0);"><i class="fa fa-behance"></i></a>
                                 <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
                             </p>
                         </div>                
@@ -289,6 +359,7 @@ color: white;
             </div>
         </div>
         
+</div>
 </div>
 </div>
 

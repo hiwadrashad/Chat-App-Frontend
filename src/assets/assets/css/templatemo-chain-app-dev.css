@@ -1,38 +1,4 @@
-/*
 
-TemplateMo 570 Chain App Dev
-
-https://templatemo.com/tm-570-chain-app-dev
-
-*/
-
-/* ---------------------------------------------
-Table of contents
-------------------------------------------------
-01. font & reset css
-02. reset
-03. global styles
-04. header
-05. banner
-06. features
-07. testimonials
-08. contact
-09. footer
-10. preloader
-11. search
-12. portfolio
-
---------------------------------------------- */
-/* 
----------------------------------------------
-font & reset css
---------------------------------------------- 
-*/
-/* 
----------------------------------------------
-reset
---------------------------------------------- 
-*/
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
 pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
 s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
@@ -975,7 +941,7 @@ Services Style
   padding-left: 65px;
   padding-right: 65px;
 }
-
+/* 
 .services:after {
   content: '';
   background-image: url(../images/services-left-dec.png);
@@ -986,7 +952,7 @@ Services Style
   width: 261px;
   height: 368px;
   z-index: 0;
-}
+} */
 
 .services:before {
   content: '';
