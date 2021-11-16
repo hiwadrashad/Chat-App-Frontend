@@ -14,6 +14,9 @@ import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
 import { AddGroupChatModalComponent } from './add-group-chat-modal/add-group-chat-modal.component';
 import { AddSingleChatModalComponent } from './add-single-chat-modal/add-single-chat-modal.component';
+import { GroupSidebarComponent } from './group-sidebar/group-sidebar.component';
+import { IndividualSidebarComponent } from './individual-sidebar/individual-sidebar.component';
+import { GeneralSidebarComponent } from './general-sidebar/general-sidebar.component';
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
     auth:{
@@ -32,14 +35,17 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     RegisterComponent,
     ChatComponent,
     AddGroupChatModalComponent,
-    AddSingleChatModalComponent
+    AddSingleChatModalComponent,
+    GroupSidebarComponent,
+    IndividualSidebarComponent,
+    GeneralSidebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MsalModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [{
     provide: MSAL_INSTANCE,

@@ -1,1 +1,51 @@
-<p>add-single-chat-modal works!</p>
+<style>
+
+.group-modal-title{
+    margin-top: 30px;
+}
+
+.group-modal-exit{
+    font-size: 20px;
+    transform: translate(260px,20px);
+    cursor: pointer;
+}
+
+.group-modal-users{
+    margin-top: 20px;
+    width: 180px !important;
+}
+
+.group-modal-add-user{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    transform: translateX(25px);
+}
+
+.group-modal-added-users{
+    margin-top: 20px;
+}
+.group-modal-add-group{
+    margin-top: 15px;
+    transform: translateX(100px);
+}        
+.add-individual-modal{
+        position: fixed;
+        margin-left: 200px;
+        width: 300px;
+        height: 250px;
+        background-color: #f5f5f5;
+        border-radius: 25px;
+        z-index: 2 !important;
+        transform: translate(-60px,180px);
+    }
+</style>
+<div class="add-individual-modal" tabindex="999">
+    <div class="autocomplete" style="width:300px;">
+        <i class="fa fa-times-circle individual-modal-exit"></i>
+        <input class="auto-input individual-modal-title"id="myInput" type="text" name="myCountry" placeholder="Group title">
+        <input class="auto-input individual-modal-users"id="myInput" type="text" name="myCountry" placeholder="Username to add">
+        <button type="submit" class="modal-submit individual-modal-add-user">Add user</button>
+      </div>
+      <button type="submit" class="modal-submit individual-modal-add-group">Add group</button>
+
+</div>
