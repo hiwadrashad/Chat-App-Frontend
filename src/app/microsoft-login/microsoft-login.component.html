@@ -1,0 +1,103 @@
+
+<style>
+    @import url(../../assets/dist/css/swipe.min.css);
+    @import url(../../assets/dist/css/lib/bootstrap.min.css);
+    .content{
+      margin-top: 100px;
+    }
+  .submit-button{
+   background-color: #3daff6;
+   color: white;
+  }
+  
+  .submit-button:hover{
+    background-color: #4e86ef;
+  }
+  header{
+        border-bottom: 0px;
+      }
+      .logo{
+        width: 80px;
+      }
+      .header-logo{
+        transform: translateY(10px);
+      }
+  
+  </style>
+  <html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="description" content="#">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="../../assets/dist/img/favicon.png" type="image/png" rel="icon">
+  </head>
+  <header class="header-area header-sticky wow slideInDown animated" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="index.html" class="logo">
+              <img class="logo header-logo" src="../../assets/assets/images/logo.png" alt="Chain App Dev">
+            </a>
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+              <li class="scroll-to-section"><a href="#services" class="">Account</a></li>
+              <li><div class="gradient-button"><a id="modal_trigger" href="#modal" class="active"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
+            </ul>        
+            <a class="menu-trigger">
+                <span>Menu</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <body class="start">
+      <div class="layout">
+        <div class="main order-md-1">
+          <div class="start">
+            <div class="container">
+              <div class="col-md-12">
+                <div class="content">
+                  <h1>Sign in to Swipe</h1>
+                  <div class="third-party">
+                    <button class="btn item bg-blue">
+                      <i class="material-icons">pages</i>
+                    </button>
+                    <button class="btn item bg-teal">
+                      <i class="material-icons">party_mode</i>
+                    </button>
+                    <button class="btn item bg-purple">
+                      <i class="material-icons">whatshot</i>
+                    </button>
+                  </div>
+                  <form>
+                    <button (click)="login()" *ngIf="!isLoggedIn()" class="btn button submit-button">Sign In</button>
+                    <button style="margin-top: 10px;" (click)="logout()" class="btn button submit-button">Sign Out</button>
+                    <div class="callout">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div> 
+  
+  
+  </body></html>
+<!-- <table>
+    <tr>
+      <td><button (click)="login()" *ngIf="!isLoggedIn()">SIGN IN</button>
+      </td>
+      <td><button (click)="logout()" *ngIf="isLoggedIn()">SIGN OUT</button></td>
+      <td><button (click)="logout()" *ngIf="!isLoggedIn()">SIGN OUT IF STILL LOGGED IN</button></td>
+      <td><button (click)="gotoprofilepage()">GO TO PROFILE PAGE</button></td>
+    </tr>
+  </table>
+  <div *ngIf="isLoggedIn()">
+    <h3>You Are Logged In</h3>
+  </div>
+  <div *ngIf="!isLoggedIn()">
+    <h3>You Are NOT Logged in</h3>
+  </div> -->

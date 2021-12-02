@@ -17,11 +17,13 @@ import { AddSingleChatModalComponent } from './add-single-chat-modal/add-single-
 import { GroupSidebarComponent } from './group-sidebar/group-sidebar.component';
 import { IndividualSidebarComponent } from './individual-sidebar/individual-sidebar.component';
 import { GeneralSidebarComponent } from './general-sidebar/general-sidebar.component';
+import { MicrosoftLoginComponent } from './microsoft-login/microsoft-login.component';
+import { CommonModule } from '@angular/common';
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
     auth:{
-      clientId: '241b9b9d-a4c2-45ed-983e-3cf2e31ff3de',
-      redirectUri: 'http://localhost:4200/'
+      clientId: 'bdb47601-aa88-48f3-a6fb-ce9a18df147b',
+      redirectUri: 'http://localhost:4200/profileoverview'
     }
   })
 }
@@ -38,7 +40,8 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     AddSingleChatModalComponent,
     GroupSidebarComponent,
     IndividualSidebarComponent,
-    GeneralSidebarComponent
+    GeneralSidebarComponent,
+    MicrosoftLoginComponent
   ],
   imports: [
     BrowserModule,

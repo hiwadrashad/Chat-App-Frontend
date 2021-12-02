@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../communication.service';
 import { ApiService } from '../api.service'; 
 import {User} from '../../logic/models/user'
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-profileoverview',
@@ -13,32 +14,25 @@ export class ProfileoverviewComponent implements OnInit {
 
   name! : string;
   allprofilesbysingleemail! : User[]; 
-  constructor(private communication: CommunicationService,private api : ApiService) { }
+  constructor(private msalService: MsalService,private communication: CommunicationService,private api : ApiService) { }
 
   ngOnInit(): void {
-    // console.warn("test")
-    // this.communication.getMessage()
-    // .subscribe(communicationemit =>{
-    //   console.warn("test2")
-    //   if(communicationemit){
-    //     console.warn("test3");
-    //     this.name = communicationemit;
-    //   }
-    // });
-    this.communication.GetMicrosoftUser().subscribe(a => 
-      {
-        this.name = a;
-        if (this.name != null || this.name != "")
+    
+    if (this.msalService.instance.getActiveAccount() != null)
+    {
+      var Account = this.msalService.instance.getActiveAccount();
+      if (Account?.username != null || Account?.username != "")
         {
-          this.api.getUsersByEmailAdress(this.name).subscribe(
+          this.api.getUsersByEmailAdress(Account?.username!).subscribe(
             x => 
             {
+              console.log(x);
               this.allprofilesbysingleemail = x as User[];
-              console.log(this.allprofilesbysingleemail);
             }
           )
         }
-      });
+      
+    }
   }
 
 }

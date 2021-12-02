@@ -12,29 +12,7 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'Chat-App-Auth0';
 
-  constructor(private msalService: MsalService, private api : ApiService, private router:Router ){
-    var item = this.api.getAllUsers().subscribe(data=>{
-    })
-  }
-  public loadScript(url : string) {
-    let node = document.createElement('script');
-    node.src = url;
-    node.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(node);
-}
-  isLoggedIn() : boolean{
-    this.msalService.instance.getActiveAccount()
-    return this.msalService.instance.getActiveAccount() != null
-  }
-
-  login(){
-    this.msalService.loginPopup().subscribe((response: AuthenticationResult) => {
-      this.msalService.instance.setActiveAccount(response.account)
-    });
-    this.router.navigate(['profileoverview']);
-  }
-
-  logout() {
-    this.msalService.logout();
+  constructor( )
+  {
   }
 }

@@ -80,9 +80,11 @@ header{
     color: #424242
 }
 .profile-card{
+    transform: translateX(0px) !important;
     transform: scale(0.8);
     min-width: 450px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #f5f5f5;
+    border-radius: 25px;
 }
 .title{
     text-align: center;
@@ -105,7 +107,7 @@ hr {
     margin-top: 100px;
     margin-left: -100px;
     width: 250px !important;
-    height: 600px;
+    height: 400px;
     overflow: auto;
     
 }
@@ -232,6 +234,9 @@ header{
 {
     transform: translateX(10px);
 }
+.order-md-2{
+    height: 100px;
+}
   </style>
 <div class="banner">
     <div  class="jumbotron bg-cover text-white">
@@ -294,6 +299,8 @@ header{
           </div>
           </div>
     <div class="profile-card-container sc1">
+        <ul>
+        <li *ngFor='let item of allprofilesbysingleemail'>
         <div class="col-xl-6 col-lg-7 col-md-12">
             <div class="card profile-header">
                 <div class="body profile-card">
@@ -302,7 +309,7 @@ header{
                             <div class="profile-image float-md-right"> <img class="" src="../../assets/dist/img/avatars/avatar-male-1.jpg" alt=""> </div>
                         </div>
                         <div class="col-lg-8 col-md-8 col-12">
-                            <h4 class="m-t-0 m-b-0"><strong>Usernam123</strong></h4>
+                            <h4 class="m-t-0 m-b-0"><strong>{{item.username}}</strong></h4>
                             <p>Michael Johnson</p>
                             <div>
                                 <button class="btn btn-primary login-btn btn-round">Login</button>
@@ -317,61 +324,9 @@ header{
                 </div>                    
             </div>
         </div>
-        <div class="col-xl-6 col-lg-7 col-md-12">
-            <div class="card profile-header">
-                <div class="body profile-card">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-12">
-                            <div class="profile-image float-md-right"> <img class="" src="../../assets/dist/img/avatars/avatar-male-2.jpg" alt=""> </div>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-12">
-                            <h4 class="m-t-0 m-b-0"><strong>Usernam123</strong></h4>
-                            <p>Michael Johnson</p>
-                            <div>
-                                <button class="btn btn-primary login-btn btn-round">Login</button>
-                            </div>
-                            <p class="social-icon m-t-5 m-b-0">
-                                <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
-                                <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
-                                <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
-                            </p>
-                        </div>                
-                    </div>
-                </div>                    
-            </div>
-        </div>
-
-        <div class="col-xl-6 col-lg-7 col-md-12">
-            <div class="card profile-header">
-                <div class="body profile-card">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-12">
-                            <div class="profile-image float-md-right"> <img class="" src="../../assets/dist/img/avatars/avatar-male-3.jpg" alt=""> </div>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-12">
-                            <h4 class="m-t-0 m-b-0"><strong>Usernam123</strong></h4>
-                            <p>Michael Johnson</p>
-                            <div>
-                                <button class="btn btn-primary login-btn btn-round">Login</button>
-                            </div>
-                            <p class="social-icon m-t-5 m-b-0">
-                                <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
-                                <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
-                                <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
-                            </p>
-                        </div>                
-                    </div>
-                </div>                    
-            </div>
-        </div>
+        </li>
+        </ul>
         
 </div>
 </div>
 </div>
-
-
-
-<!-- <p>profileoverview works!</p>
-<div>
-    {{name}}
-</div> -->
