@@ -70,14 +70,14 @@ header{
                     <i class="material-icons">whatshot</i>
                   </button>
                 </div>
-                <p>or use your email account:</p>
-                <form>
+                <p>Fill in your credentials:</p>
+                <form #basicForm="ngForm" (submit)="login(basicForm.value)">
                   <div class="form-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" required="">
+                    <input [(ngModel)]="model.email" name="email" type="email" id="inputEmail" class="form-control" placeholder="Email Address" required="">
                     <button class="btn icon"><i class="material-icons">mail_outline</i></button>
                   </div>
                   <div class="form-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                    <input [(ngModel)]="model.password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
                     <button class="btn icon"><i class="material-icons">lock_outline</i></button>
                   </div>
                   <button type="submit" class="btn button submit-button" formaction="index-2.html">Sign In</button>

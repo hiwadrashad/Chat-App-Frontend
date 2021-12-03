@@ -19,6 +19,7 @@ import { IndividualSidebarComponent } from './individual-sidebar/individual-side
 import { GeneralSidebarComponent } from './general-sidebar/general-sidebar.component';
 import { MicrosoftLoginComponent } from './microsoft-login/microsoft-login.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
     auth:{
@@ -44,6 +45,7 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     MicrosoftLoginComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     MsalModule,

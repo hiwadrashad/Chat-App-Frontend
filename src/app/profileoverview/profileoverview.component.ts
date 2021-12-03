@@ -4,6 +4,7 @@ import { CommunicationService } from '../communication.service';
 import { ApiService } from '../api.service'; 
 import {User} from '../../logic/models/user'
 import { MsalService } from '@azure/msal-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profileoverview',
@@ -14,7 +15,10 @@ export class ProfileoverviewComponent implements OnInit {
 
   name! : string;
   allprofilesbysingleemail! : User[]; 
-  constructor(private msalService: MsalService,private communication: CommunicationService,private api : ApiService) { }
+  msalServiceInstance! : MsalService;
+  constructor( private msalService: MsalService,private communication: CommunicationService,private api : ApiService, private router : Router) {
+      this.msalServiceInstance = msalService;
+   }
 
   ngOnInit(): void {
     
@@ -30,9 +34,23 @@ export class ProfileoverviewComponent implements OnInit {
               this.allprofilesbysingleemail = x as User[];
             }
           )
-        }
-      
+        }      
     }
+    // temporarily bypass
+    this.api.getUsersByEmailAdress("hiwad.rashad@itvitaelearning.nl").subscribe(
+      x => 
+      {
+        console.log(x);
+        this.allprofilesbysingleemail = x as User[];
+      }
+    )
+  }
+
+
+  login(input : number)
+  {
+    this.communication.SetLoginUser(this.allprofilesbysingleemail.find(a => a.id == input)!)
+    this.router.navigate(['login']);
   }
 
 }

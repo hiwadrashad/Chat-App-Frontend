@@ -13,27 +13,28 @@ import {User} from '../../logic/models/user'
 })
 export class MicrosoftLoginComponent implements OnInit {
 
-  public user! : User;
   ngOnInit(): void {
   }
   constructor(private msalService: MsalService, private api : ApiService, private router:Router, private communication: CommunicationService){
-    this.user = {} as User;
-    var item = this.api.getAllUsers().subscribe(data=>{
-      //console.warn(data)
-    });
+
   }
 
   isLoggedIn() : boolean{
-    this.msalService.instance.getActiveAccount()
     return this.msalService.instance.getActiveAccount() != null
   }
 
   login(){
+    console.log("test0");
     
-    this.msalService.loginPopup().subscribe((response: AuthenticationResult) => {
+    //var item = this.msalService.loginRedirect();
+    this.msalService.loginPopup()
+    .subscribe((response: AuthenticationResult) => {
+      console.log("test1");
       this.msalService.instance.setActiveAccount(response.account)
       if (this.msalService.instance.getActiveAccount() != null)
       {
+        console.log("test2");
+        
         this.communication.SetMicrosoftUser(this.msalService.instance.getActiveAccount()?.username!);
         this.router.navigate(['profileoverview']);
       }

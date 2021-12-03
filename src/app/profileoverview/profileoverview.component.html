@@ -312,7 +312,7 @@ header{
                             <h4 class="m-t-0 m-b-0"><strong>{{item.username}}</strong></h4>
                             <p>Michael Johnson</p>
                             <div>
-                                <button class="btn btn-primary login-btn btn-round">Login</button>
+                                <button (click)="login(item.id)"class="btn btn-primary login-btn btn-round">Login</button>
                             </div>
                             <p class="social-icon m-t-5 m-b-0">
                                 <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
