@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   {
     if (await this.api.login(this.user,this.model.password))
     {
-      console.log("succesfull");
+      this.router.navigate(['chat']);
     }
     else
     {

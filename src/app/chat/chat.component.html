@@ -144,6 +144,10 @@
     transform: translateX(100px);
 }
 
+.group-item{
+    cursor: pointer;
+}
+
 </style>
 <html lang="en"><head>
     <meta charset="utf-8">
@@ -489,96 +493,50 @@
                                     <h1 *ngIf="currentlyinindividualchat">Individual chat</h1>
                                     <h1 *ngIf="currentlyingeneralchat">General chat</h1>
                                     <div class="list-group" id="alerts" role="tablist">
-                                        <a href="#" class="filterNotifications all latest notification" data-toggle="list">
+                                      
+                                        <ul *ngIf="currentlyingroupchat">
+                                        <li *ngFor='let item of groupchats'>
+                                        <a (click)="SetGroupChat(item)" class="group-item filterNotifications all latest notification" data-toggle="list">
                                             <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
                                             <div class="status">
                                                 <i class="material-icons online">fiber_manual_record</i>
                                             </div>
                                             <div class="data">
-                                                <p>Janette has accepted your friend request on Swipe.</p>
-                                                <span>Oct 17, 2018</span>
+                                                <p>{{item.title}}</p>
+                                                <span>{{item.creationDate | date:'mediumDate'}}</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="filterNotifications all latest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-male-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Michael">
-                                            <div class="status">
-                                                <i class="material-icons online">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Michael, you have a new friend suggestion today.</p>
-                                                <span>Jun 21, 2018</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="filterNotifications all latest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-male-2.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Mariette">
-                                            <div class="status">
-                                                <i class="material-icons online">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Mariette have just sent you a new message.</p>
-                                                <span>Feb 15, 2018</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="filterNotifications all latest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-6.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Louis">
-                                            <div class="status">
-                                                <i class="material-icons online">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Louis has a birthday today. Wish her all the best.</p>
-                                                <span>Mar 23, 2018</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="filterNotifications all latest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-3.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
-                                            <div class="status">
-                                                <i class="material-icons online">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Harmony has accepted your friend request on Swipe.</p>
-                                                <span>Jan 5, 2018</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="filterNotifications all oldest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
-                                            <div class="status">
-                                                <i class="material-icons offline">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Keith have just sent you a new message.</p>
-                                                <span>Dec 22, 2017</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="filterNotifications all oldest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-2.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
-                                            <div class="status">
-                                                <i class="material-icons offline">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Michael, you have a new friend suggestion today.</p>
-                                                <span>Nov 29, 2017</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="filterNotifications all oldest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-male-3.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
-                                            <div class="status">
-                                                <i class="material-icons offline">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Ryan have just sent you a new message.</p>
-                                                <span>Sep 31, 2017</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="filterNotifications all oldest notification" data-toggle="list">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-male-4.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
-                                            <div class="status">
-                                                <i class="material-icons offline">fiber_manual_record</i>
-                                            </div>
-                                            <div class="data">
-                                                <p>Mildred has a birthday today. Wish him all the best.</p>
-                                                <span>Jul 19, 2017</span>
-                                            </div>
-                                        </a>
+                                        </li>
+                                        </ul>
+                                        <ul *ngIf="currentlyingeneralchat">
+                                            <li *ngFor='let item of generalchats'>
+                                            <a (click)="SetGeneralChat(item)" class="group-item filterNotifications all latest notification" data-toggle="list">
+                                                <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
+                                                <div class="status">
+                                                    <i class="material-icons online">fiber_manual_record</i>
+                                                </div>
+                                                <div class="data">
+                                                    <p>{{item.title}}</p>
+                                                    <span>{{item.creationDate | date:'mediumDate'}}</span>
+                                                </div>
+                                            </a>
+                                            </li>
+                                            </ul>
+                                            <ul *ngIf="currentlyinindividualchat">
+                                                <li *ngFor='let item of singleuserchats'>
+                                                <a (click)="SetSingleUserChat(item)"  class="group-item filterNotifications all latest notification" data-toggle="list">
+                                                    <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Janette">
+                                                    <div class="status">
+                                                        <i class="material-icons online">fiber_manual_record</i>
+                                                    </div>
+                                                    <div class="data">
+                                                        <p>{{item.title}}</p>
+                                                        <span>{{item.creationDate | date:'mediumDate'}}</span>
+                                                    </div>
+                                                </a>
+                                                </li>
+                                                </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -1074,125 +1032,81 @@
                             <div class="content" id="content">
                                 <div class="container">
                                     <div class="col-md-12">
-                                        <div class="date">
-                                            <hr>
-                                            <span>Yesterday</span>
-                                            <hr>
-                                        </div>
-                                        <div class="message">
+                                     <ul *ngIf="currentlyingroupchat" >
+                                        <li *ngFor='let item of currentgroupchat.messages'>
+                                        <div *ngIf="item.user.id != user.id" class="message">
                                             <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
                                             <div class="text-main">
                                                 <div class="text-group">
                                                     <div class="text">
-                                                        <p>We've got some killer ideas kicking about already.</p>
+                                                        <p>{{item.text}}</p>
                                                     </div>
                                                 </div>
-                                                <span>09:46 AM</span>
+                                                <span>{{item.startDate | date:'mediumDate'}}</span>
                                             </div>
                                         </div>
-                                        <div class="message me">
+                                        <div *ngIf="item.user.id == user.id" class="message me">
                                             <div class="text-main">
                                                 <div class="text-group me">
                                                     <div class="text me">
-                                                        <p>Can't wait! How are we coming along with the client?</p>
+                                                        <p>{{item.text}}</p>
                                                     </div>
                                                 </div>
-                                                <span>11:32 AM</span>
+                                                <span>{{item.startDate | date:'mediumDate'}}</span>
                                             </div>
                                         </div>
-                                        <div class="message">
+                                        </li>
+                                      </ul>
+                                      <ul *ngIf="currentlyinindividualchat" >
+                                        <li *ngFor='let item of currentsingleuserchat.messages'>
+                                        <div *ngIf="item.user.id != user.id" class="message">
                                             <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
                                             <div class="text-main">
                                                 <div class="text-group">
                                                     <div class="text">
-                                                        <p>Coming along nicely, we've got a draft for the client quarries completed.</p>
+                                                        <p>{{item.text}}</p>
                                                     </div>
                                                 </div>
-                                                <span>02:56 PM</span>
+                                                <span>{{item.startDate | date:'mediumDate'}}</span>
                                             </div>
                                         </div>
-                                        <div class="message me">
+                                        <div *ngIf="item.user.id == user.id" class="message me">
                                             <div class="text-main">
                                                 <div class="text-group me">
                                                     <div class="text me">
-                                                        <p>Roger that boss!</p>
+                                                        <p>{{item.text}}</p>
                                                     </div>
                                                 </div>
-                                                <div class="text-group me">
-                                                    <div class="text me">
-                                                        <p>I have already started gathering some stuff for the mood boards, excited to start!</p>
-                                                    </div>
-                                                </div>
-                                                <span>10:21 PM</span>
+                                                <span>{{item.startDate | date:'mediumDate'}}</span>
                                             </div>
                                         </div>
-                                        <div class="message">
+                                        </li>
+                                      </ul>
+                                      <ul *ngIf="currentlyingeneralchat" >
+                                        <li *ngFor='let item of currentgeneralchat.messages'>
+                                        <div *ngIf="item.user.id != user.id" class="message">
                                             <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
                                             <div class="text-main">
                                                 <div class="text-group">
                                                     <div class="text">
-                                                        <p>Great start guys, I've added some notes to the task. We may need to make some adjustments to the last couple of items - but no biggie!</p>
+                                                        <p>{{item.text}}</p>
                                                     </div>
                                                 </div>
-                                                <span>11:07 PM</span>
+                                                <span>{{item.startDate | date:'mediumDate'}}</span>
                                             </div>
                                         </div>
-                                        <div class="date">
-                                            <hr>
-                                            <span>Today</span>
-                                            <hr>
-                                        </div>
-                                        <div class="message me">
+                                        <div *ngIf="item.user.id == user.id" class="message me">
                                             <div class="text-main">
                                                 <div class="text-group me">
                                                     <div class="text me">
-                                                        <p>Well done all. See you all at 2 for the kick-off meeting.</p>
+                                                        <p>{{item.text}}</p>
                                                     </div>
                                                 </div>
-                                                <span>10:21 PM</span>
+                                                <span>{{item.startDate | date:'mediumDate'}}</span>
                                             </div>
                                         </div>
-                                        <div class="message">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
-                                            <div class="text-main">
-                                                <div class="text-group">
-                                                    <div class="text">
-                                                        <div class="attachment">
-                                                            <button class="btn attach"><i class="material-icons md-18">insert_drive_file</i></button>
-                                                            <div class="file">
-                                                                <h5><a href="#">Tenacy Agreement.pdf</a></h5>
-                                                                <span>24kb Document</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span>11:07 PM</span>
-                                            </div>
-                                        </div>
-                                        <div class="message me">
-                                            <div class="text-main">
-                                                <div class="text-group me">
-                                                    <div class="text me">
-                                                        <p>Hope you're all ready to tackle this great project. Let's smash some Brand Concept &amp; Design!</p>
-                                                    </div>
-                                                </div>
-                                                <span><i class="material-icons">check</i>10:21 PM</span>
-                                            </div>
-                                        </div>
-                                        <div class="message">
-                                            <img class="avatar-md" src="../../assets/dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith">
-                                            <div class="text-main">
-                                                <div class="text-group">
-                                                    <div class="text typing">
-                                                        <div class="wave">
-                                                            <span class="dot"></span>
-                                                            <span class="dot"></span>
-                                                            <span class="dot"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </li>
+                                      </ul>
                                     </div>
                                 </div>
                             </div>
