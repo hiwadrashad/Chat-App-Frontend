@@ -8,6 +8,7 @@ import { take } from 'rxjs/operators';
 import { GroupChat } from 'src/logic/models/groupchat';
 import { GeneralChat } from 'src/logic/models/generalchat';
 import { SingleUserChat } from 'src/logic/models/singleuserchat';
+import { Message } from 'src/logic/models/message';
 
 
 @Injectable({
@@ -105,4 +106,67 @@ async getsingleuserchatsbyuserid(id : Number)
   .catch(a => {});     
    return this.currentusersingleuserchats;
 }
+
+async addmessagetogeneralchat(user: User,groupid : number, message : string)
+{
+  let date = new Date();
+  const messagetosend = {} as Message;
+  messagetosend.startDate = date;
+  messagetosend.endDate = date;
+  messagetosend.text = message;
+  messagetosend.user = user;
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var url=`https://localhost:44378/api/Chat/api/addmessagetogeneralchat/${groupid}`;
+  await this.http.put<any>(url, messagetosend,header).toPromise()
+  .then()
+  .catch();    
+  var urlget=`https://localhost:44378/api/Group/api/getgeneralchat/${groupid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.currentusergeneralchats = a})
+  .catch(a => {});
+   return this.currentusergeneralchats;
 }
+
+async addmessagetosingleuserchat(user: User,groupid : number, message : string)
+{
+  let date = new Date();
+  const messagetosend = {} as Message;
+  messagetosend.startDate = date;
+  messagetosend.endDate = date;
+  messagetosend.text = message;
+  messagetosend.user = user;
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var url=`https://localhost:44378/api/Chat/api/addmessagetosingleuserchat/${groupid}`;
+  await this.http.put<any>(url, messagetosend,header).toPromise()
+  .then()
+  .catch();    
+  var urlget=`https://localhost:44378/api/Group/api/getsingleuserchatbyuserid/${groupid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.currentusersingleuserchats = a})
+  .catch(a => {});
+   return this.currentusersingleuserchats;
+}
+
+
+async addmessagetogroupchat(user: User,groupid : number, message : string)
+{
+  let date = new Date();
+  const messagetosend = {} as Message;
+  messagetosend.startDate = date;
+  messagetosend.endDate = date;
+  messagetosend.text = message;
+  messagetosend.user = user;
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var url=`https://localhost:44378/api/Chat/api/addmessagetogroupchat/${groupid}`;
+  await this.http.put<any>(url, messagetosend,header).toPromise()
+  .then()
+  .catch();    
+  var urlget=`https://localhost:44378/api/Group/api/getgroupchatsbyuserid/${groupid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.currentusergroupchats = a})
+  .catch(a => {});
+   return this.currentusergroupchats;
+}
+}
+
+

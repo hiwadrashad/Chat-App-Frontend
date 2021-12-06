@@ -14,7 +14,7 @@
         position: fixed;
         margin-left: 200px;
         width: 300px;
-        height: 300px;
+        height: 450px;
         background-color: #f5f5f5;
         border-radius: 25px;
         z-index: 2 !important;
@@ -25,12 +25,15 @@
         position: fixed;
         margin-left: 200px;
         width: 300px;
-        height: 250px;
+        height: 350px;
         background-color: #f5f5f5;
         border-radius: 25px;
         z-index: 2 !important;
         transform: translate(-60px,180px);
     }
+.private-box{
+    margin-left: 10px;
+}
 
     .autocomplete {
   position: relative;
@@ -161,10 +164,19 @@
     <div *ngIf="addmultipleusersgroup" class="add-group-modal" tabindex="999">
         <div class="autocomplete" style="width:300px;">
             <i class="fa fa-times-circle group-modal-exit" (click)="addmultipleusersgroup = false;addsingleusergroup = false;"></i>
-            <input class="auto-input group-modal-title"id="myInput" type="text" name="myCountry" placeholder="Group title">
-            <input class="auto-input group-modal-users"id="myInput" type="text" name="myCountry" placeholder="Usernames to add">
+            <input class="auto-input group-modal-title"id="myInput" type="text" name="grouptitle" placeholder="Group title">
+            <mat-form-field>
+            <input [formControl]="myControl" [matAutocomplete]="auto" matInput class="auto-input group-modal-users"id="myInput" type="text" name="username" placeholder="Usernames to add">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="DisplayObjectName">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.title}}
+                </mat-option>
+            </mat-autocomplete>
+            </mat-form-field>
             <button type="submit" class="modal-submit group-modal-add-user">Add user</button>
             <div class="auto-input group-modal-added-users"id="myInput" type="text" name="myCountry">Added users : 0</div>
+            <input class="auto-input group-modal-title"id="myInput" type="text" name="userlimit" placeholder="Allowed user count 0 = unlimited">
+            <input class="private-box auto-input group-modal-title"id="myInput" type="checkbox" name="privatechat" placeholder="Private chat"> Private chat
           </div>
           <button type="submit" class="modal-submit group-modal-add-group">Add group</button>
 
@@ -175,6 +187,8 @@
             <input class="auto-input individual-modal-title"id="myInput" type="text" name="myCountry" placeholder="Group title">
             <input class="auto-input individual-modal-users"id="myInput" type="text" name="myCountry" placeholder="Username to add">
             <button type="submit" class="modal-submit individual-modal-add-user">Add user</button>
+            <input class="auto-input group-modal-title"id="myInput" type="text" name="userlimit" placeholder="Allowed user count 0 = unlimited">
+            <input class="private-box auto-input group-modal-title"id="myInput" type="checkbox" name="privatechat" placeholder="Private chat"> Private chat
           </div>
           <button type="submit" class="modal-submit individual-modal-add-group">Add group</button>
 
@@ -1113,8 +1127,8 @@
                             <div class="container">
                                 <div class="col-md-12">
                                     <div class="bottom">
-                                        <form class="position-relative w-100">
-                                            <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
+                                        <form #basicForm="ngForm" (submit)="AddMessageToChat()" class="position-relative w-100">
+                                            <textarea [(ngModel)]="messagemodel.message" name="email" class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
                                             <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
                                             <button type="submit" class="btn send"><i class="material-icons">send</i></button>
                                         </form>
