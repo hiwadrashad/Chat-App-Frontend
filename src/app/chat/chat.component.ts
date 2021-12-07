@@ -6,9 +6,11 @@ import { SingleUserChat } from 'src/logic/models/singleuserchat';
 import { User } from 'src/logic/models/user';
 import { ApiService } from '../api.service';
 import { CommunicationService } from '../communication.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {map,startWith} from 'rxjs/operators'
+import { TempGroup } from 'src/logic/models/tempgroup';
+import { TempUsername } from 'src/logic/models/tempusername';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -42,17 +44,61 @@ export class ChatComponent implements OnInit {
   
   currentgeneralchat! : GeneralChat;
   
+  users! : User[]
+
   myControl = new FormControl();
-  filteredOptions! : Observable<SingleUserChat[]>;
+  filteredOptions! : Observable<User[]>;
 
   public messagemodel = 
   {
-     message : "",
+     message : ""
+  }
+
+  public usernamemodel = new TempUsername;
+
+  public addgroupmodel = new TempGroup;
+
+  addeduserstogroup = 0;
+
+  wait(ms : number){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
+ }
+
+  async AddUserToGroupChat()
+  {
+    if (this.users.some((item) => item.username == this.usernamemodel.user.username))
+    {
+      if (!this.addgroupmodel.users.some((item) => item.username == this.usernamemodel.user.username))
+      {
+    this.addgroupmodel.users.push(this.users.find(a => a.username == this.usernamemodel.user.username)!);
+    this.addeduserstogroup = this.addgroupmodel.users.length;
+      }
+    }
+  }
+
+  async AddGroupChat(data : NgForm)
+  {
+    this.api.addgroupchat(this.user,this.addgroupmodel);
+    this.messagemodel.message = ""
+    this.usernamemodel = {} as TempUsername;
+    this.addgroupmodel = {} as TempGroup;
+    this.addeduserstogroup = 0;
+    this.addmultipleusersgroup = false;
+    this.wait(500);
+    this.groupchats = await this.api.getgroupchatsbyuserid(this.user.id);
+    console.log(this.groupchats);
+    this.groupchats = this.groupchats.filter(function (obj){
+      return obj.chatBanned !== true;
+    })
   }
 
   DisplayObjectName(subject : any)
   {
-    return subject ? subject.title : undefined;
+    return subject ? subject.username : undefined;
   }
   
   SetSingleUserChat(input : SingleUserChat)
@@ -90,6 +136,7 @@ export class ChatComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    
     try
     {
     this.communication.GetLoginUser().subscribe( (input:User) => {
@@ -107,6 +154,9 @@ export class ChatComponent implements OnInit {
     this.singleuserchats = this.singleuserchats.filter(function (obj){
       return obj.chatBanned !== true;
     })
+    console.log(this.user.id);
+    this.users = await this.api.getusers(this.user.id);
+    console.log(this.users);
     }
     catch
     {
@@ -118,10 +168,10 @@ export class ChatComponent implements OnInit {
       map(value => this.convertstringtoarray(value))
     )
   }
-private convertstringtoarray(value : string): SingleUserChat[]
+private convertstringtoarray(value : string): User[]
 {
  const filterValue = value.toLowerCase();
- return this.singleuserchats.filter(options => options.title.toLowerCase().includes(filterValue))
+ return this.users.filter(options => options.username.toLowerCase().includes(filterValue));
 }
 
 }

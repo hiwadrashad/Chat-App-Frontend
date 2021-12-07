@@ -14,6 +14,10 @@
     .header-logo{
       transform: translateY(10px);
     }
+    .main-container{
+      position:relative; 
+          }
+
 </style>
 <html lang="en"><head>
 
@@ -26,6 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet">
 
   </head>
+  <div class="main-container">
   <header class="header-area header-sticky wow slideInDown animated" data-wow-duration="0.75s" data-wow-delay="0s" style="visibility: visible;-webkit-animation-duration: 0.75s; -moz-animation-duration: 0.75s; animation-duration: 0.75s;-webkit-animation-delay: 0s; -moz-animation-delay: 0s; animation-delay: 0s;">
     <div class="container">
       <div class="row">
@@ -224,4 +229,65 @@
   </div>
 
 
-</body></html>
+</body>
+<footer id="newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="section-heading">
+          <h4>Join Our Newsletter</h4>
+        </div>
+      </div>
+      <div class="col-lg-6 offset-lg-3">
+        <form id="search" action="#" method="GET">
+          <div class="row">
+            <div class="col-lg-6 col-sm-6">
+              <fieldset>
+                <input type="address" name="address" class="email" placeholder="Email Address..." autocomplete="on" required="">
+              </fieldset>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <fieldset>
+                <button type="submit" class="main-button">Subscribe Now <i class="fa fa-angle-right"></i></button>
+              </fieldset>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row footer-text">
+      <div class="col-lg-3">
+        <div class="footer-widget">
+          <h4>Contact Us</h4>
+          <p>New York - Rockefeller Plaza</p>
+          <p><a href="#">010-020-0340</a></p>
+          <p><a href="#">info@company.co</a></p>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="footer-widget">
+          <h4>About Us</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="footer-widget">
+          <div class="logo">
+            <img src="../assets/assets/images/logo.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 footer-copyright">
+        <div class="copyright-text">
+          <p>Copyright © 2022 Chat-App.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+</html>

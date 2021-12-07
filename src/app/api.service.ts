@@ -9,6 +9,8 @@ import { GroupChat } from 'src/logic/models/groupchat';
 import { GeneralChat } from 'src/logic/models/generalchat';
 import { SingleUserChat } from 'src/logic/models/singleuserchat';
 import { Message } from 'src/logic/models/message';
+import { TempGroup } from 'src/logic/models/tempgroup';
+import { AddGroupChatModalComponent } from './add-group-chat-modal/add-group-chat-modal.component';
 
 
 @Injectable({
@@ -23,6 +25,7 @@ export class ApiService {
   public currentusergroupchats! : GroupChat[];
   public currentusergeneralchats! : GeneralChat[];
   public currentusersingleuserchats! : SingleUserChat[];
+  public users! : User[];
 
   constructor(private http:HttpClient) {
    this.user = {} as User
@@ -162,6 +165,39 @@ async addmessagetogroupchat(user: User,groupid : number, message : string)
   .then()
   .catch();    
   var urlget=`https://localhost:44378/api/Group/api/getgroupchatsbyuserid/${groupid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.currentusergroupchats = a})
+  .catch(a => {});
+   return this.currentusergroupchats;
+}
+
+async getusers(requestingid : number)
+{
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var url=`https://localhost:44378/api/Credentials/api/getusers/${requestingid}`;
+  await this.http.get<any>(url,header).toPromise()
+  .then(a => {this.users = a})
+  .catch(a => {});     
+   return this.users;
+}
+
+async addgroupchat(user : User,input : TempGroup)
+{
+  let date = new Date();
+  const group = {} as GroupChat;
+ group.title = input.title;
+  group.creationDate = date;
+  group.users = input.users;
+  group.groupOwner = user;
+  group.chatBanned = false;
+  group.maxAmountPersons = input.userlimit;
+  group.private = input.private;
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var url=`https://localhost:44378/api/Group/api/addgroupchat/${encodeURI(input.password)}`;
+  await this.http.post<any>(url, group,header).toPromise()
+  .then()
+  .catch();  
+  var urlget=`https://localhost:44378/api/Group/api/getgroupchatsbyuserid/${user.id}`;
   await this.http.get<any>(urlget,header).toPromise()
   .then(a => {this.currentusergroupchats = a})
   .catch(a => {});
