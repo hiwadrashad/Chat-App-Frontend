@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeneralChat } from 'src/logic/models/generalchat';
 import { GroupChat } from 'src/logic/models/groupchat';
@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 import {map,startWith} from 'rxjs/operators'
 import { TempGroup } from 'src/logic/models/tempgroup';
 import { TempUsername } from 'src/logic/models/tempusername';
+import {GroupChatLogin} from 'src/logic/models/groupchatlogin'
+import { TempSingle } from 'src/logic/models/tempsingle';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -22,9 +24,13 @@ export class ChatComponent implements OnInit {
 
   user! : User;
 
+  addedrecipienttosinglechat : boolean = false; 
+
   addmultipleusersgroup : boolean = false;
 
   addsingleusergroup : boolean = false; 
+
+  currentlyaskpassword : boolean = false;
 
   currentlyingroupchat : boolean = true;
 
@@ -47,6 +53,7 @@ export class ChatComponent implements OnInit {
   users! : User[]
 
   myControl = new FormControl();
+
   filteredOptions! : Observable<User[]>;
 
   public messagemodel = 
@@ -58,6 +65,10 @@ export class ChatComponent implements OnInit {
 
   public addgroupmodel = new TempGroup;
 
+  public addsingleusermodel = new TempSingle;
+
+  public grouploginmodel = new GroupChatLogin;
+
   addeduserstogroup = 0;
 
   wait(ms : number){
@@ -68,17 +79,55 @@ export class ChatComponent implements OnInit {
    }
  }
 
+ async AddUserToSingleChat()
+ {
+    if (this.addedrecipienttosinglechat == false)
+    {
+    this.addsingleusermodel.recipientuser = this.users.find(a => a.username == this.usernamemodel.user.username)!;
+    this.addsingleusermodel.senderuser = this.user;
+    this.addedrecipienttosinglechat = true;
+    }
+  
+ }
+
+ async CloseSingleUserAddModal()
+ {
+   this.addedrecipienttosinglechat = false;
+   this.addmultipleusersgroup = false;
+   this.addsingleusergroup = false;
+   this.addsingleusermodel = {} as TempSingle;
+ }
+
+ async AddSingleChat(data : NgForm)
+ {
+   this.addsingleusermodel.senderuser = this.user;
+   this.api.addsingleuserchat(this.user,this.addsingleusermodel);
+   this.messagemodel.message = "";
+   this.usernamemodel = {} as TempUsername;
+   this.addsingleusermodel = {} as TempSingle;
+   this.addedrecipienttosinglechat = false;
+   this.addmultipleusersgroup = false;
+   this.addsingleusergroup = false;
+   this.wait(500);
+   this.singleuserchats = await this.api.getsingleuserchatsbyuserid(this.user.id);
+   this.singleuserchats = this.singleuserchats.filter(function (obj){
+    return obj.chatBanned !== true;
+  })
+ }
+
   async AddUserToGroupChat()
   {
     if (this.users.some((item) => item.username == this.usernamemodel.user.username))
     {
       if (!this.addgroupmodel.users.some((item) => item.username == this.usernamemodel.user.username))
       {
-    this.addgroupmodel.users.push(this.users.find(a => a.username == this.usernamemodel.user.username)!);
-    this.addeduserstogroup = this.addgroupmodel.users.length;
+       this.addgroupmodel.users.push(this.users.find(a => a.username == this.usernamemodel.user.username)!);
+       this.addeduserstogroup = this.addgroupmodel.users.length;
       }
     }
   }
+
+  
 
   async AddGroupChat(data : NgForm)
   {
@@ -90,7 +139,6 @@ export class ChatComponent implements OnInit {
     this.addmultipleusersgroup = false;
     this.wait(500);
     this.groupchats = await this.api.getgroupchatsbyuserid(this.user.id);
-    console.log(this.groupchats);
     this.groupchats = this.groupchats.filter(function (obj){
       return obj.chatBanned !== true;
     })
@@ -108,7 +156,26 @@ export class ChatComponent implements OnInit {
 
   SetGroupChat(input : GroupChat)
   {
+    if (input.private == true)
+    {
+      this.grouploginmodel.group = input;
+      this.currentlyaskpassword = true;
+    }
+    else
+    {
     this.currentgroupchat = input;
+    }
+  }
+
+  async LoginGroupChat(ata : NgForm)
+  {
+    if (await this.api.logingroupchat(this.grouploginmodel.attemptedpassword,this.grouploginmodel.group))
+    {
+      this.currentlyaskpassword = false;
+      this.grouploginmodel.attemptedpassword = "";
+      this.currentgroupchat = this.grouploginmodel.group;  
+      this.grouploginmodel.group = {} as GroupChat;
+    }
   }
 
   SetGeneralChat(input : GeneralChat)

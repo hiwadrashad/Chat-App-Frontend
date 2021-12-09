@@ -11,6 +11,7 @@ import { SingleUserChat } from 'src/logic/models/singleuserchat';
 import { Message } from 'src/logic/models/message';
 import { TempGroup } from 'src/logic/models/tempgroup';
 import { AddGroupChatModalComponent } from './add-group-chat-modal/add-group-chat-modal.component';
+import { TempSingle } from 'src/logic/models/tempsingle';
 
 
 @Injectable({
@@ -26,6 +27,7 @@ export class ApiService {
   public currentusergeneralchats! : GeneralChat[];
   public currentusersingleuserchats! : SingleUserChat[];
   public users! : User[];
+  public succesfullpasswordinputgroupchat : boolean = false;
 
   constructor(private http:HttpClient) {
    this.user = {} as User
@@ -181,6 +183,27 @@ async getusers(requestingid : number)
    return this.users;
 }
 
+async addsingleuserchat(user : User, input : TempSingle)
+{
+  let date = new Date();
+  const group = {} as SingleUserChat;
+  group.title = input.title;
+  group.creationDate = date;
+  group.originUser = input.senderuser;
+  group.recipientUser = input.recipientuser;
+  group.private = input.private;
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var url=`https://localhost:44378/api/Group/api/addsingleuserchat/${encodeURI(input.password)}`;
+  await this.http.post<any>(url, group,header).toPromise()
+  .then()
+  .catch();  
+  var urlget=`https://localhost:44378/api/Group/api/getsingleuserchatbyuserid/${user.id}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.currentusersingleuserchats = a})
+  .catch(a => {});
+  return this.currentusersingleuserchats;
+}
+
 async addgroupchat(user : User,input : TempGroup)
 {
   let date = new Date();
@@ -202,6 +225,16 @@ async addgroupchat(user : User,input : TempGroup)
   .then(a => {this.currentusergroupchats = a})
   .catch(a => {});
    return this.currentusergroupchats;
+}
+
+async logingroupchat(password: string,group: GroupChat)
+{
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var url=`https://localhost:44378/api/Group/api/logingroupchat/${encodeURI(password)}`;
+  await this.http.post<any>(url, group,header).toPromise()
+  .then(a => {this.succesfullpasswordinputgroupchat = true})
+  .catch(a => {this.succesfullpasswordinputgroupchat = false});  
+   return this.succesfullpasswordinputgroupchat;
 }
 }
 

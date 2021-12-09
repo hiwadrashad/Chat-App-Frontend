@@ -6,8 +6,10 @@ import { ChatComponent } from './chat/chat.component';
 import { RegisterComponent } from './register/register.component';
 import { SellingPageComponent } from './selling-page/selling-page.component';
 import { MicrosoftLoginComponent } from './microsoft-login/microsoft-login.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
+  {path:'admindashboard', component: AdminDashboardComponent},
   {path:'mslogin', component: MicrosoftLoginComponent},
   {path:'login', component: LoginComponent},
   {path:'chat', component: ChatComponent},
