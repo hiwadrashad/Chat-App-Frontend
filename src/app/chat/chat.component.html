@@ -1058,7 +1058,7 @@
                                             </div>
                                             <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-30">phone_in_talk</i></button>
                                             <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-36">videocam</i></button>
-                                            <button class="btn d-md-block d-none"><i class="material-icons md-30">info</i></button>
+                                            <button *ngIf="isadmin" class="btn d-md-block d-none"><i (click)="GoToAdminDashboard()" class="material-icons md-30 fas fa-chart-line"></i></button>
                                             <div class="dropdown">
                                                 <button class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons md-30">more_vert</i></button>
                                                 <div class="dropdown-menu dropdown-menu-right">

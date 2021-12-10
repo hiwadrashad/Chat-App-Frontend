@@ -22,7 +22,9 @@ export class ChatComponent implements OnInit {
 
   constructor( private api : ApiService, private router:Router, private communication: CommunicationService) { }
 
-  user! : User;
+  isadmin : boolean = false;
+
+  user : User = { } as User;
 
   addedrecipienttosinglechat : boolean = false; 
 
@@ -77,6 +79,11 @@ export class ChatComponent implements OnInit {
     while(end < start + ms) {
       end = new Date().getTime();
    }
+ }
+
+ async GoToAdminDashboard()
+ {
+  this.router.navigate(['admindashboard']);
  }
 
  async AddUserToSingleChat()
@@ -209,6 +216,14 @@ export class ChatComponent implements OnInit {
     this.communication.GetLoginUser().subscribe( (input:User) => {
         this.user = input;
     });
+    if (this.user.role == 0)
+    {
+      this.isadmin = true;
+    } 
+    else
+    {
+      this.isadmin = false;
+    }
     this.groupchats = await this.api.getgroupchatsbyuserid(this.user.id);
     this.groupchats = this.groupchats.filter(function (obj){
       return obj.chatBanned !== true;
@@ -227,8 +242,10 @@ export class ChatComponent implements OnInit {
     }
     catch
     {
+      //this.isadmin = false;
       //this.router.navigate(['profileoverview']);
       this.router.navigate(['chat']);
+      this.isadmin = true;
     }
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),

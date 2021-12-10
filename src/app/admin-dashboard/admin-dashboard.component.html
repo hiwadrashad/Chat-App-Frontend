@@ -161,6 +161,65 @@
      z-index: 2 !important;
      transform: translate(-60px,180px);  
  }
+#notifications
+{
+    margin-top: 35vh;
+}
+
+.card-container
+{
+    margin-top: 0 !important;
+}
+
+.info-card{
+    max-width: 800px;
+    margin-top: 25px;
+    height: 125px !important;
+    border-left: #3daef5 100px solid;
+    resize: horizontal !important;
+    
+}
+.info-card > img
+{
+    transform: translate(-47px,8px) scale(1.7);
+}
+
+.card-info
+{
+    transform: translate(100px,-50px);
+}
+h1{
+    font-weight: bold;
+}
+
+.ban-button{
+    background-color: #3daef5;
+    border: none;
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+  transform: translate(500px,-110px);
+}
+
+.card-info-icon
+{
+    margin-right: 10px;
+}
+
+@media only screen and (min-width: 1460px) {
+    .info-card
+    {
+       max-width: 800px;
+       margin-top: 10px;
+       height: 175px;
+       resize: horizontal !important;
+       margin-left: 10vw;       
+    }
+}
  </style>
  <html lang="en"><head>
      <meta name="description" content="#">
@@ -179,9 +238,8 @@
                      <div class="inside">
                          <div class="nav nav-tab menu">
                              <button class="btn"><img class="avatar-xl" src="../../assets/dist/img/avatars/avatar-male-1.jpg" alt="avatar"></button>
-                             <a style="cursor: pointer;" data-toggle="tab" class="show" ><i class="material-icons">account_circle</i></a>
-                             <a style="cursor: pointer;" data-toggle="tab" class="f-grow1 show"><i class="material-icons">notifications_none</i></a>
-                           
+                             <a style="cursor: pointer;" data-toggle="tab" class="show"><i class="material-icons fas fa-user card-info-icon" (click)="banoverview = true;chartoverview = false"></i></a>
+                             <a style="cursor: pointer;" data-toggle="tab" class="f-grow1 show"><i class="material-icons fas fa-chart-line" (click)="banoverview = false;chartoverview = true"></i></a>                           
                              <button class="btn power" onclick="visitPage();"><i class="material-icons active">power_settings_new</i></button>
                          </div>
                      </div>
@@ -189,7 +247,7 @@
              </div>
              <!-- End of Navigation -->
              <!-- Start of Sidebar -->
-             <div class="sidebar" id="sidebar">
+             <div *ngIf="banoverview" class="sidebar" id="sidebar">
                  <div class="container">
                      <div class="col-md-12">
                          <div class="tab-content">
@@ -472,9 +530,9 @@
                                      </form>
                                  </div>
                                  <div class="list-group sort">
-                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="all">All</button>
-                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest">Latest</button>
-                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest">Latest</button>
+                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="all">Profiles</button>
+                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest">Groups</button>
+                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest">Messages</button>
                                  </div>						
                                  <div class="notifications">
                                
@@ -936,16 +994,16 @@
                  </div>
              </div>
              <!-- End of Create Chat -->
-             <div class="main">
+             <div  class="main">
                  <div class="tab-content" id="nav-tabContent">
                      <!-- Start of Babble -->
                      <div class="babble tab-pane fade active show" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
                          <!-- Start of Chat -->
                          <div class="chat" id="chat1">
-                             <div class="top">
+                             <div  class="top">
                                  <div class="container">
-                                     <div class="col-md-12">
-                                         <div class="inside">
+                                     <div  class="col-md-12">
+                                         <div  class="inside">
                                              <a href="#"><img class="avatar-md" src="../../assets/dist/img/avatars/avatar-male-1.jpg" data-toggle="tooltip" data-placement="top" title="" alt="avatar" data-original-title="Keith"></a>
                                              <div class="status">
                                                  <i class="material-icons online">fiber_manual_record</i>
@@ -955,7 +1013,7 @@
                                              </div>
                                              <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-30">phone_in_talk</i></button>
                                              <button class="btn connect d-md-block d-none" name="1"><i class="material-icons md-36">videocam</i></button>
-                                             <button class="btn d-md-block d-none"><i class="material-icons md-30">info</i></button>
+                                             <button class="btn d-md-block d-none"><i class="material-icons md-30 fas fa-comments"(click)="GoToChat()" ></i></button>
                                              <div class="dropdown">
                                                  <button class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons md-30">more_vert</i></button>
                                                  <div class="dropdown-menu dropdown-menu-right">
@@ -972,23 +1030,71 @@
                                  </div>
                              </div>
                              <div class="content" id="content">
-                                 <div class="container">
-                                     <div class="col-md-12">
-                                        <!-- admin dashboard -->
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="container">
-                                 <div class="col-md-12">
-                                     <div class="bottom">
-                                             <textarea name="email" class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
-                                             <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
-                                             <button type="submit" class="btn send"><i class="material-icons">send</i></button>
-                                         <label>
-                                             <input type="file">
-                                             <span class="btn attach d-sm-block d-none"><i class="material-icons">attach_file</i></span>
-                                         </label> 
-                                     </div>
+                                 <div class="container card-container">
+                                     <div *ngIf="banoverview" class="col-md-12">
+                                        <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                            <div class="card-info">
+                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
+                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                            </div>
+                                            <button class="ban-button">
+                                            <i class="fas fa-gavel"></i>
+                                                Ban                                               
+                                            </button>
+                                        </div>
+                                        <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                            <div class="card-info">
+                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
+                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                            </div>
+                                            <button class="ban-button">
+                                            <i class="fas fa-gavel"></i>
+                                                Ban                                               
+                                            </button>
+                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                            <div class="card-info">
+                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
+                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                            </div>
+                                            <button class="ban-button">
+                                            <i class="fas fa-gavel"></i>
+                                                Ban                                               
+                                            </button>
+                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                            <div class="card-info">
+                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
+                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                            </div>
+                                            <button class="ban-button">
+                                            <i class="fas fa-gavel"></i>
+                                                Ban                                               
+                                            </button>
+                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                            <div class="card-info">
+                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
+                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                            </div>
+                                            <button class="ban-button">
+                                            <i class="fas fa-gavel"></i>
+                                                Ban                                               
+                                            </button>
+                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                            <div class="card-info">
+                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
+                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                            </div>
+                                            <button class="ban-button">
+                                            <i class="fas fa-gavel"></i>
+                                                Ban                                               
+                                            </button>
+                                        </div>
+                                    </div>
                                  </div>
                              </div>
                          </div>
