@@ -7,8 +7,10 @@ import { RegisterComponent } from './register/register.component';
 import { SellingPageComponent } from './selling-page/selling-page.component';
 import { MicrosoftLoginComponent } from './microsoft-login/microsoft-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { HtmlEditorComponent } from './html-editor/html-editor.component';
 
 const routes: Routes = [
+  {path:'htmleditor', component: HtmlEditorComponent},
   {path:'admindashboard', component: AdminDashboardComponent},
   {path:'mslogin', component: MicrosoftLoginComponent},
   {path:'login', component: LoginComponent},

@@ -65,6 +65,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { HtmlEditorComponent } from './html-editor/html-editor.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
@@ -89,7 +90,8 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     IndividualSidebarComponent,
     GeneralSidebarComponent,
     MicrosoftLoginComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    HtmlEditorComponent
   ],
   imports: [
     FormsModule,
