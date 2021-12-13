@@ -35,11 +35,11 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "Chat-App-MSAL/src/assets/dashboard/vendors/js/vendor.bundle.base.js",
-              "Chat-App-MSAL/src/assets/dashboard/vendors/chart.js/Chart.min.js",
               "Chat-App-MSAL/src/assets/dashboard/vendors/datatables.net/jquery.dataTables.js",
               "Chat-App-MSAL/src/assets/dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.js",
               "Chat-App-MSAL/src/assets/dashboard/vendors/js/dataTables.select.min.js",
+              "Chat-App-MSAL/src/assets/dashboard/vendors/js/vendor.bundle.base.js",
+              "Chat-App-MSAL/src/assets/dashboard/vendors/chart.js/Chart.min.js",
               "Chat-App-MSAL/src/assets/dashboard/vendors/js/off-canvas.js",
               "Chat-App-MSAL/src/assets/dashboard/vendors/js/template.js",
               "Chat-App-MSAL/src/assets/dashboard/vendors/js/settings.js",

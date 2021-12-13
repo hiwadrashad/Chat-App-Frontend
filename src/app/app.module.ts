@@ -66,6 +66,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { HtmlEditorComponent } from './html-editor/html-editor.component';
+import {NgChartsModule} from 'ng2-charts'
 
 export function MSALInstanceFactory(): IPublicClientApplication{
   return new PublicClientApplication({
@@ -94,6 +95,7 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     HtmlEditorComponent
   ],
   imports: [
+    NgChartsModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

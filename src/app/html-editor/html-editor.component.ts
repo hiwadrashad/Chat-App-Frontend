@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-html-editor',
@@ -7,21 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HtmlEditorComponent implements OnInit {
 
+
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: false  }
+
+  public barChartLabels = ['2006','2007','2008','2009','2011','2012'];
+  public barChartType = 'bar';
+  public barChartLegend = false;
+
+  public barChartData = 
+  [
+    {data: [56,59,80,81,56,55,40], label: 'Series A',lineTension: 0.4,fill:true},
+    {data:[28,48,40,19,86,27,90],label: 'Series B',  lineTension: 0.4,fill:true
+
+    }
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/vendor.bundle.base.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/chart.js/Chart.min.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/datatables.net/jquery.dataTables.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/dataTables.select.min.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/off-canvas.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/template.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/settings.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/todolist.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/dashboard.js");
-    this.loadJsFile("Chat-App-MSAL/src/assets/dashboard/vendors/js/Chart.roundedBarCharts.js");
-
   }
   public loadJsFile(url: string) {  
     let node = document.createElement('script');  
