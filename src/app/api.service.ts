@@ -28,15 +28,19 @@ export class ApiService {
   public currentusersingleuserchats! : SingleUserChat[];
   public users! : User[];
   public succesfullpasswordinputgroupchat : boolean = false;
+  public messages : Message[] = [];
+  public singleuserchat : SingleUserChat[] = [];
+  public generalchats : GeneralChat[] = [];
+  public groupchats : GroupChat[] = [];
 
   constructor(private http:HttpClient) {
    this.user = {} as User
   }
-   getAllUsers()
+   async getAllUsers()
    {
      var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
      let url="https://localhost:44378/api/Credentials/api/getusers"
-     return this.http.get(url,header);
+     return await this.http.get(url,header);
    }
 
    getUsersByEmailAdress(email: string)
@@ -235,6 +239,54 @@ async logingroupchat(password: string,group: GroupChat)
   .then(a => {this.succesfullpasswordinputgroupchat = true})
   .catch(a => {this.succesfullpasswordinputgroupchat = false});  
    return this.succesfullpasswordinputgroupchat;
+}
+
+async getallmessages(userid : Number)
+{
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var urlget=`https://localhost:44378/api/Chat/api/getmessages/${userid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.messages = a})
+  .catch(a => {});
+   return this.messages;
+}
+
+async getallusers(userid : Number)
+{
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var urlget=`https://localhost:44378/api/Credentials/api/getallusers/${userid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.users = a})
+  .catch(a => {});
+   return this.users;
+}
+
+async getallgroupchats(userid : Number)
+{
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var urlget=`https://localhost:44378/api/Group/api/getgroupschat/${userid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.groupchats = a})
+  .catch(a => {});
+   return this.groupchats;
+}
+async getallsingleuserchats(userid : Number)
+{
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var urlget=`https://localhost:44378/api/Group/api/getsingleuserchat/${userid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.singleuserchat = a})
+  .catch(a => {});
+   return this.singleuserchat;
+}
+async getallgeneralchats(userid : Number)
+{
+  var header = {headers : new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzY0NTQ5NTcsImV4cCI6MTY2Nzk5MDk1NywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.zf5pNDjPjLVmhk82LajY_tjpRAiw11nEv_iWUEBOcXo')}
+  var urlget=`https://localhost:44378/api/Group/api/getgeneralchat/${userid}`;
+  await this.http.get<any>(urlget,header).toPromise()
+  .then(a => {this.generalchats = a})
+  .catch(a => {});
+   return this.generalchats;
 }
 }
 

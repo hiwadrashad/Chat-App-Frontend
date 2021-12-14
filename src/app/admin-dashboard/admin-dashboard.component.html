@@ -296,8 +296,6 @@ h1{
          min-height: 90vh!important;
          overflow-y: visible;
        }
-
-      
  </style>
  <html lang="en"><head>
      <meta name="description" content="#">
@@ -603,14 +601,14 @@ h1{
                              <div id="notifications" class="tab-pane fade active show">
                                  <div class="search">
                                      <form class="form-inline position-relative">
-                                         <input [(ngModel)]="searchterm" type="search" class="form-control" id="notice" placeholder="Filter notifications...">
+                                         <input [(ngModel)]="searchterm" (ngModelChange)="ExecuteSearchValue()" name="searchterm" type="search" class="form-control" id="notice" placeholder="Filter notifications...">
                                          <button type="button" class="btn btn-link loop"><i class="material-icons filter-list">filter_list</i></button>
                                      </form>
                                  </div>
                                  <div class="list-group sort">
-                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="all">Profiles</button>
-                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest">Groups</button>
-                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest">Messages</button>
+                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="all" (click)="currentlyinprofiles = true;currentlyingroups = false;currentlyinmessages = false;">Profiles</button>
+                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest" (click)="currentlyinprofiles = false;currentlyingroups = true;currentlyinmessages = false;">Groups</button>
+                                     <button class="btn filterNotificationsBtn" data-toggle="list" data-filter="latest" (click)="currentlyinprofiles = false;currentlyingroups = false;currentlyinmessages = true;">Messages</button>
                                  </div>						
                                  <div class="notifications">
                                
@@ -1308,7 +1306,7 @@ h1{
                                                       <div class="card chip card-tale ">
                                                         <div class="card-body off-card">
                                                           <p class="mb-4 chip">Total User's Count</p>
-                                                          <p class="fs-30 mb-2 chip">4</p>
+                                                          <p class="fs-30 mb-2 chip">{{totalusercount}}</p>
                                                           <p class="chip">User's</p>
                                                         </div>
                                                       </div>
@@ -1317,7 +1315,7 @@ h1{
                                                       <div class="card card-dark-blue">
                                                         <div class="card-body off-card">
                                                           <p class="mb-4 chip">Total Group Count</p>
-                                                          <p class="fs-30 mb-2 chip">2</p>
+                                                          <p class="fs-30 mb-2 chip">{{totalgroupcount}}</p>
                                                           <p class="chip">Groups</p>
                                                         </div>
                                                       </div>
@@ -1328,7 +1326,7 @@ h1{
                                                       <div class="card card-light-blue">
                                                         <div class="card-body off-card">
                                                           <p class="mb-4 chip">Total Message Count</p>
-                                                          <p class="fs-30 mb-2 chip">12</p>
+                                                          <p class="fs-30 mb-2 chip">{{totalmessagecount}}</p>
                                                           <p class="chip">Messages</p>
                                                         </div>
                                                       </div>
@@ -1341,7 +1339,7 @@ h1{
               <div class="card ">
                 <div class="card-body chart-container"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                   <p class="card-title center-text">Monthly registers</p>
-                  <p class="font-weight-500 center-text">The total number of user registrations within the date range.</p>
+                  <p class="font-weight-500 center-text">The total number of user group registrations within the date range.</p>
                   <div class="d-flex flex-wrap mb-5 center-labels">
                     <div class="mr-5 mt-3 cent">
                       <p class="text-muted">Average Month</p>
@@ -1628,8 +1626,8 @@ h1{
                                                           <div class="d-flex">
                                                             <img src="../../assets/dashboard/images/faces/face1.jpg" alt="user">
                                                             <div>
-                                                              <p class="text-info mb-1">Isabella Becker</p>
-                                                              <p class="mb-0">Isabella01@hotmail.com</p>
+                                                              <p class="text-info mb-1">test1</p>
+                                                              <p class="mb-0">test2@gmail.com</p>
                                                               <small>9:30 am</small>
                                                             </div>
                                                           </div>
@@ -1638,8 +1636,8 @@ h1{
                                                           <div class="d-flex">
                                                             <img src="../../assets/dashboard/images/faces/face2.jpg" alt="user">
                                                             <div>
-                                                              <p class="text-info mb-1">Adam Warren</p>
-                                                              <p class="mb-0">Adam.Warren@gmail.com</p>
+                                                              <p class="text-info mb-1">test2</p>
+                                                              <p class="mb-0">test2@gmail.com</p>
                                                               <small>10:30 am</small>
                                                             </div>
                                                           </div>
@@ -1648,8 +1646,8 @@ h1{
                                                           <div class="d-flex">
                                                           <img src="../../assets/dashboard/images/faces/face3.jpg" alt="user">
                                                          <div>
-                                                          <p class="text-info mb-1">Leonard Thornton</p>
-                                                          <p class="mb-0">Leo2@ziggo.nl</p>
+                                                          <p class="text-info mb-1">test3</p>
+                                                          <p class="mb-0">test3@gmail.com</p>
                                                           <small>11:30 am</small>
                                                          </div>
                                                           </div>
@@ -1658,19 +1656,9 @@ h1{
                                                           <div class="d-flex">
                                                             <img src="../../assets/dashboard/images/faces/face4.jpg" alt="user">
                                                             <div>
-                                                              <p class="text-info mb-1">George Morrison</p>
-                                                              <p class="mb-0">GeorgeSoro@hotmail.com</p>
+                                                              <p class="text-info mb-1">test4</p>
+                                                              <p class="mb-0">test4@gmail.com</p>
                                                               <small>8:50 am</small>
-                                                            </div>
-                                                          </div>
-                                                        </li>
-                                                        <li>
-                                                          <div class="d-flex">
-                                                            <img src="../../assets/dashboard/images/faces/face5.jpg" alt="user">
-                                                            <div>
-                                                            <p class="text-info mb-1">Ryan Cortez</p>
-                                                            <p class="mb-0">Cortezono@gmail.com</p>
-                                                            <small>9:00 am</small>
                                                             </div>
                                                           </div>
                                                         </li>
@@ -1694,68 +1682,77 @@ h1{
                              <div *ngIf="banoverview" class="content remove-under-bar" id="content">
                                  <div class="container card-container">
                                      <div class="col-md-12">
+                                       <ul *ngIf="currentlyinprofiles">
+                                         <li *ngFor='let item of filteredusers'>
                                         <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
                                             <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
                                             <div class="card-info">
-                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
-                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                            <h1><i class="fas fa-user card-info-icon"></i>{{item.username}}</h1>
+                                            <div><i class="fas fa-envelope card-info-icon"></i>{{item.email}}</div>
                                             </div>
                                             <button class="ban-button">
                                             <i class="fas fa-gavel"></i>
                                                 Ban                                               
                                             </button>
                                         </div>
-                                        <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
-                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
-                                            <div class="card-info">
-                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
-                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
+                                         </li>
+                                       </ul>
+                                       <ul *ngIf="currentlyinmessages">
+                                        <li *ngFor='let item of filteredmessages'>
+                                       <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                           <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                           <div class="card-info">
+                                           <h1><i class="fas fa-user card-info-icon"></i>{{item.user.username}}</h1>
+                                           <div><i class="fas fa-envelope card-info-icon"></i>{{item.user.email}}</div>
+                                           </div>
+                                           <button class="ban-button">
+                                           <i class="fas fa-gavel"></i>
+                                               Ban                                               
+                                           </button>
+                                       </div>
+                                        </li>
+                                      </ul>
+                                      <ul *ngIf="currentlyingroups">
+                                        <li *ngFor='let item of filteredgeneralchats'>
+                                       <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                           <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                           <div class="card-info">
+                                           <h1><i class="fas fa-user card-info-icon"></i>{{item.title}}</h1>
+                                           <div><i class="fas fa-envelope card-info-icon"></i>{{item.owner.username}}</div>
+                                           </div>
+                                           <button class="ban-button">
+                                           <i class="fas fa-gavel"></i>
+                                               Ban                                               
+                                           </button>
+                                       </div>
+                                        </li>
+                                        <li *ngFor='let item of filteredsingleuserchats'>
+                                          <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                              <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                              <div class="card-info">
+                                              <h1><i class="fas fa-user card-info-icon"></i>{{item.title}}</h1>
+                                              <div><i class="fas fa-envelope card-info-icon"></i>{{item.recipientUser.username}}</div>
+                                              </div>
+                                              <button class="ban-button">
+                                              <i class="fas fa-gavel"></i>
+                                                  Ban                                               
+                                              </button>
+                                          </div>
+                                           </li>
+                                           <li *ngFor='let item of filteredgroupchats'>
+                                            <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
+                                                <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
+                                                <div class="card-info">
+                                                <h1><i class="fas fa-user card-info-icon"></i>{{item.title}}</h1>
+                                                <div><i class="fas fa-envelope card-info-icon"></i>{{item.groupOwner.username}}</div>
+                                                </div>
+                                                <button class="ban-button">
+                                                <i class="fas fa-gavel"></i>
+                                                    Ban                                               
+                                                </button>
                                             </div>
-                                            <button class="ban-button">
-                                            <i class="fas fa-gavel"></i>
-                                                Ban                                               
-                                            </button>
-                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
-                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
-                                            <div class="card-info">
-                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
-                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
-                                            </div>
-                                            <button class="ban-button">
-                                            <i class="fas fa-gavel"></i>
-                                                Ban                                               
-                                            </button>
-                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
-                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
-                                            <div class="card-info">
-                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
-                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
-                                            </div>
-                                            <button class="ban-button">
-                                            <i class="fas fa-gavel"></i>
-                                                Ban                                               
-                                            </button>
-                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
-                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
-                                            <div class="card-info">
-                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
-                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
-                                            </div>
-                                            <button class="ban-button">
-                                            <i class="fas fa-gavel"></i>
-                                                Ban                                               
-                                            </button>
-                                        </div>                              <div name="email" class="info-card form-control" placeholder="Start typing for reply..." rows="1">
-                                            <img class="avatar-xl card-image" src="../../assets/dist/img/avatars/avatar-female-1.jpg" alt="avatar">
-                                            <div class="card-info">
-                                            <h1><i class="fas fa-user card-info-icon"></i>Johnson Smith</h1>
-                                            <div><i class="fas fa-envelope card-info-icon"></i>Johnsonsmith@gmail.com</div>
-                                            </div>
-                                            <button class="ban-button">
-                                            <i class="fas fa-gavel"></i>
-                                                Ban                                               
-                                            </button>
-                                        </div>
+                                             </li>
+                                      </ul>
                                     </div>
                                  </div>
                              </div>

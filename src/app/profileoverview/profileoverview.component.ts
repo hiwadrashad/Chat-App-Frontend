@@ -53,4 +53,9 @@ export class ProfileoverviewComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
+
+  goToFrontPage()
+  {
+    this.router.navigate([""]);
+  }
 }

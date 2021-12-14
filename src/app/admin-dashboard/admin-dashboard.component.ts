@@ -3,33 +3,78 @@ import { Router } from '@angular/router';
 import { User } from 'src/logic/models/user';
 import { CommunicationService } from '../communication.service';
 import {Chart} from 'node_modules/chart.js';
+import { Message } from 'src/logic/models/message';
+import { GeneralChat } from 'src/logic/models/generalchat';
+import { SingleUserChat } from 'src/logic/models/singleuserchat';
+import { GroupChat } from 'src/logic/models/groupchat';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
-export class AdminDashboardComponent implements OnInit, OnChanges {
+export class AdminDashboardComponent implements OnInit {
 
-  constructor(private communication: CommunicationService,private router:Router) { }
+  constructor( private api : ApiService,private communication: CommunicationService,private router:Router) { }
   user! : User;
 
-  @Input() searchterm : string = "";
+  searchterm : string = "";
 
-  currentlyinprofiles : boolean = true;
+  currentlyinprofiles : boolean = false;
 
   currentlyingroups : boolean = false;
 
-  currentlyinmessages : boolean = false; 
+  currentlyinmessages : boolean = true; 
 
   banoverview : boolean = true;
 
   chartoverview : boolean = false;
 
+  allmessages : Message[] = [];
+
+  filteredmessages : Message[] = [];
+
+  allusers : User[] = [];
+
+  filteredusers : User[] = [];
+
+  allgeneralchats : GeneralChat[] = [];
+
+  filteredgeneralchats : GeneralChat[] = [];
+
+  allsingleuserchats : SingleUserChat[] = [];
+
+  filteredsingleuserchats : SingleUserChat[] = [];
+
+  allgroupchats : GroupChat[] = [];
+
+  filteredgroupchats : GroupChat[] = [];
+
+  totalusercount : number = 0;
+
+  totalgroupcount : number = 0;
+
+  totalmessagecount : number = 0;
+
+  JanuaryAverageRegister : number = 0;
+
+  AprilAverageRegister : number = 0;
+
+  JuneAverageRegister : number = 0;
+
+  AugustAverageRegister : number = 0;
+
+  OctoberAverageRegister : number = 0;
+
+  DecemberAverageRegister : number = 12;
+
   async GoToChat()
   {
     this.router.navigate(['chat']);
   }
+
+  
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -42,54 +87,84 @@ export class AdminDashboardComponent implements OnInit, OnChanges {
   public barChartLegend = false;
 
   public barChartData = 
-  [
-    {data:[28,48,40,19,86,27,90],label: 'Series B',  lineTension: 0.4,fill:true},
+  [ 
+    {data:[this.JanuaryAverageRegister,this.AprilAverageRegister ,this.JuneAverageRegister ,this.AugustAverageRegister ,this.OctoberAverageRegister ,this.DecemberAverageRegister],label: 'Series B',  lineTension: 0.4,fill:true},
   ];
   
-  ngOnChanges(changes: SimpleChanges)
+  ExecuteSearchValue()
   {
-    console.log(changes);
+    if (this.searchterm == "")
+    {
+      this.filteredusers = this.allusers;
+      this.filteredmessages = this.allmessages;
+      this.filteredgroupchats = this.allgroupchats;
+      this.filteredsingleuserchats = this.allsingleuserchats;
+      this.filteredgeneralchats = this.allgeneralchats;
+    }
+    else
+    {
+      if (this.currentlyinmessages)
+      {
+        this.filteredmessages = this.allmessages.filter(a => a.text.includes(this.searchterm) || a.user.email.includes(this.searchterm) 
+        || a.user.username.includes(this.searchterm) || a.user.name.includes(this.searchterm));
+      }
+      if (this.currentlyinprofiles)
+      {
+        this.filteredusers = this.allusers.filter(a => a.email.includes(this.searchterm) 
+        || a.username.includes(this.searchterm) || a.name.includes(this.searchterm));
+      }
+      if (this.currentlyingroups)
+      {
+        this.filteredgroupchats = this.allgroupchats.filter(a => a.title.includes(this.searchterm) || a.groupOwner.email.includes(this.searchterm) 
+        || a.groupOwner.username.includes(this.searchterm) || a.groupOwner.name.includes(this.searchterm));
+        this.filteredgeneralchats = this.allgeneralchats.filter(a => a.title.includes(this.searchterm) || a.owner.email.includes(this.searchterm) 
+        || a.owner.username.includes(this.searchterm) || a.owner.name.includes(this.searchterm));
+        this.filteredsingleuserchats = this.allsingleuserchats.filter(a => a.title.includes(this.searchterm) || a.originUser.email.includes(this.searchterm) 
+        || a.originUser.username.includes(this.searchterm) || a.originUser.name.includes(this.searchterm));
+      }
+    }
   }
 
-  ngOnInit(): void {
-    var myChart = new Chart("order-chart", {
-      type: 'bar',
-      data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
+  async ngOnInit(): Promise<void> {
     try
     {
     this.communication.GetLoginUser().subscribe( (input:User) => {
         this.user = input;
+    });
+    this.allusers =  await this.api.getusers(this.user.id);
+    this.allmessages = await this.api.getallmessages(this.user.id);
+    this.allgroupchats = await this.api.getallgroupchats(this.user.id);
+    this.allsingleuserchats = await this.api.getallsingleuserchats(this.user.id);
+    this.allgeneralchats = await this.api.getallgeneralchats(this.user.id);
+    this.filteredusers = this.allusers;
+    this.filteredmessages = this.allmessages;
+    this.filteredgroupchats = this.allgroupchats;
+    this.filteredsingleuserchats = this.allsingleuserchats;
+    this.filteredgeneralchats = this.allgeneralchats;
+    this.totalusercount = this.allusers.length;
+    this.totalmessagecount = this.allmessages.length;
+    this.totalgroupcount = this.allgeneralchats.length + this.allgroupchats.length + this.allsingleuserchats.length;
+    this.allgroupchats.forEach((element) => {
+    if (element.creationDate.getMonth() == 0 || 1)
+    {
+      this.JanuaryAverageRegister = this.JanuaryAverageRegister + 1;
+    }
+    if (element.creationDate.getMonth() == 2 || 3)
+    {
+      this.AprilAverageRegister = this.AprilAverageRegister + 1;
+    }    if (element.creationDate.getMonth() == 4 || 5)
+    {
+      this.JuneAverageRegister = this.JuneAverageRegister + 1;
+    }    if (element.creationDate.getMonth() == 6 || 7)
+    {
+      this.AugustAverageRegister = this.AugustAverageRegister + 1;
+    }    if (element.creationDate.getMonth() == 8 || 9)
+    {
+      this.OctoberAverageRegister = this.OctoberAverageRegister + 1;
+    }    if (element.creationDate.getMonth() == 10 || 11 || 12)
+    {
+      this.DecemberAverageRegister = this.DecemberAverageRegister + 1;
+    }
     });
     if (this.user.role != 0)
     {
